@@ -1,0 +1,11 @@
+distill-me — third-party attributions
+=====================================
+
+This repository is licensed MIT (see LICENSE). It vendors the following
+third-party material under its own license:
+
+- `.claude/skills/grill-me/` — the `grill-me` skill, a faithful copy from
+  https://github.com/mattpocock/skills (Matt Pocock), licensed MIT.
+  See `.claude/skills/grill-me/NOTICE` for details.
+
+All other content is original to this repository.

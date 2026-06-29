@@ -1,0 +1,17 @@
+grill-me — vendored, NOT authored by this repository
+=====================================================
+
+Upstream / source:  https://github.com/mattpocock/skills  (Matt Pocock)
+
+This `grill-me` skill is a faithful copy of the upstream skill, vendored into
+distill-me so the distillation workflow is self-contained — clone the repo and
+the mandatory Grill sub-tool is present without an extra install. The protocol
+`distill-domain-knowledge` invokes it at step ② (Grill).
+
+It is the upstream author's work, redistributed here with attribution; it is not
+original to this repository. To track upstream instead of this vendored copy,
+install grill-me from the source repo above and point your agent at that.
+
+License: MIT — Copyright (c) Matt Pocock (upstream `mattpocock/skills`). The
+upstream MIT permission notice applies to this vendored copy; full text at
+https://github.com/mattpocock/skills/blob/main/LICENSE
