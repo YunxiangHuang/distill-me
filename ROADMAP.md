@@ -15,7 +15,7 @@
 
 ## 工作流能力待办
 
-1. **`init-knowledge-base` skill（建库脚手架）**：从"领域名 + 关键代码仓"一键 scaffold 标准骨架（目录约定 + 空 glossary + gaps + 派生 CLAUDE.md + 记忆库命名空间约定 + **L1 `recall-<域>-knowledge` 召回路由 stub**），替代手动 bootstrap。（与 M2 同诉求。）L2 通用发现层（`find-domain-knowledge`）已在仓内常驻、零领域细节、靠命名约定路由；L1 则是**每域一个的薄路由**（不抄 domain facts 防腐烂、跨 repo 可达，构造约束见 `find-domain-knowledge` SKILL「Building a recall-*-knowledge (L1) entry」），属 scaffold 产物而非通用层——现状要手写,应由 scaffold 自动产出 stub 以免漏建（编排型 workflow 里领域知识不自燃，缺 L1 入口召回链就断）。
+1. **`start-distill-domain-knowledge` skill（per-domain 开张向导）** [设计已定，实现中]：从"领域名 + 关键代码仓"一键 scaffold 标准骨架（目录约定 + 空 glossary + gaps + 派生 CLAUDE.md + 记忆库命名空间约定 + **L1 `recall-<域>-knowledge` 召回路由 stub**），替代手动 bootstrap。（与 M2 同诉求。）Grill 驱动，支持 greenfield / additive 两路径，产初始 backlog 后交棒 `distill-domain-knowledge`。L2 通用发现层（`find-domain-knowledge`）已在仓内常驻、零领域细节、靠命名约定路由；L1 则是**每域一个的薄路由**（不抄 domain facts 防腐烂、跨 repo 可达，构造约束见 `find-domain-knowledge` SKILL「Building a recall-*-knowledge (L1) entry」），属 scaffold 产物而非通用层——现状要手写，应由 scaffold 自动产出 stub 以免漏建（编排型 workflow 里领域知识不自燃，缺 L1 入口召回链就断）。设计 spec：`docs/superpowers/specs/2026-06-30-start-distill-domain-knowledge-design.md`；实施计划：`docs/superpowers/plans/2026-07-01-start-distill-domain-knowledge.md`。
 2. **checkpoint 机制**：一轮蒸馏（Scaffold→Grill→Verify→Capture→Glossary→Distill）链长、跨多步，中断即丢进度。定义 checkpoint 捕获什么——已 grill 的问答与裁决、Verify 已证实/证伪条目、未决 gaps、当前 slice 状态——使新会话能 resume 而非重来。
 3. **大领域的分步骤蒸馏指引**：大领域每次开工都要重跑枚举/扫描去发现"还有哪些子片没蒸"，重复且贵。沉淀一份**持久的领域分解图**（子片清单 + 各自状态 done/pending/blocked + 推荐顺序）作活文档随蒸馏更新，新会话读它直接挑下一片，不重做 discovery。
 4. **领域 scope 锚点**：没有显式声明"本域活在哪些服务/仓库/目录"，探索就**过度发散**——agent 漂进邻域、反复要人工校准焦点。每个域一个 **scope 锚点**产物（key services / repos / dirs + 明确的 out-of-scope 列表），喂给验证/探索 agent 约束搜索面；也是 #1 的输入。与 #3 互补：#4 划边界（哪里找）、#3 排顺序（先蒸哪片）。
