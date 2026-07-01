@@ -9,6 +9,7 @@
 - `.claude/skills/grill-me/` — Grill 步的访谈子工具（**vendor 自 [`mattpocock/skills`](https://github.com/mattpocock/skills)**，MIT；归属见其 `NOTICE`）。
 - `README.md` / `AGENTS.md` — 复用指南（人读 / agent 读）。
 - 你 fork 后建的知识库会另加 `knowledge/`、`knowledge/glossary.md`、`pending/gaps.md`——它们属**你的知识库**、不属本 workflow 仓。
+- **本仓是 workflow 本体，不在此 distill / 建知识库**：`start-distill-domain-knowledge` 检测到本仓（有 `.claude/skills/` 却无 `knowledge/`）时应 refuse——建库请到你自己的领域仓。
 
 ## 核心 workflow
 
