@@ -1,0 +1,2 @@
+// fake domainB service — 用于 fixture，非真实代码
+func HandleT(x) { /* domainB 想用 T 表「一次交易凭据」——与 domainA 的 T 冲突 */ }
