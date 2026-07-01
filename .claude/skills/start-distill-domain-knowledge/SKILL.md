@@ -50,6 +50,51 @@ description: Use to START distilling a NEW domain into a knowledge base — the 
 
 `§B` 是跨宿主手工 bootstrap prose，保留为可移植降级路径。本 skill 是 **Claude-Code-native 自动化路径**，覆盖**加强版 B3**（搭骨架 + 领域 grill + 侦察）。**不**接管 B1（装协议 skill）、B2（装外部 plugin）；B0 能力自检 / B4 就绪自检以**报告**呈现，不强制。
 
+## 运行时决策树（STEP0–4）
+
+> **所有分支值（greenfield/additive、归属关系、侦察深度）均运行时由 grill 确定，绝不在设计/代码硬编码。** 设计交付的是这棵树的形状 + 不变量 + 产物。
+
+```
+/start-distill-domain-knowledge "我要蒸馏 domainB 领域"
+│
+├ STEP0 检测环境
+│   有 knowledge/ + glossary.md + recall-*-knowledge?
+│   ├ 有既有 KB 结构 → ADDITIVE
+│   └ 无 → GREENFIELD，但**先 confirm 落点**（"这里没有既有 KB，在 <cwd> 新建 domainB 知识库吗?"）  ← I4
+│   ※ "别在 distill-me 本仓建" 的守卫**不进本 skill**（保持通用），由 distill-me 自己的 CLAUDE.md 一句话挡
+│
+├ STEP1 [仅 ADDITIVE] recall@start 反哺 + 关系 grill                                                 ← I6
+│   先 recall 记忆库（domainB 是否已被提及挂在某域下?）→ 带提示问归属：
+│   ┌ 同 KB 并列 domain → knowledge/domainB/ 与 domainA/ 并列；新 recall-domainB-knowledge；共享命名空间
+│   ├ 不同 KB           → 用户指定**另一路径** greenfield 起新结构；独立路由；独立命名空间
+│   └ 大 domain 的 sub-domain → 嵌套 knowledge/<大域>/domainB/；**扩展**既有路由；沿用大域命名空间
+│   （引用 distill-domain-knowledge/references/grilling.md：一次一分支、每问带荐答）
+│
+├ STEP2 grill 领域身份（both）
+│   边界（domainB 含/不含什么）? 核心服务 = 哪些代码仓/路径?
+│   → **让用户指定每个核心服务的本地路径** → 存在性核验：                                            ← I3 输入
+│       可读 → 开 STEP3；不可读 → warn + 记 gaps + 对该服务**跳过** STEP3
+│   → glossary 收录 umbrella 词；additive 时**先**跨域碰撞检查                                       ← I2
+│   （引用 distill-domain-knowledge/references/glossary-first.md：碰撞检查纪律）
+│
+├ STEP3 [可选，opt-in 后问深度] 方向性探索
+│   扫核心服务 → 初始 backlog；默认**提议跑**、深度**必问**（轻/中，默认中=排序菜单）、可 skip
+│
+└ STEP4 落产物（非破坏式）                                                                          ← I1
+    greenfield：建容器 + 第一个域 + L1 stub + 命名空间 + 薄指针 CLAUDE.md
+    additive：  只新增/扩展，绝不覆盖既有域**知识文件**
+    → index@end（记忆库落 namespace + umbrella 词 + backlog）                                       ← I6
+    （引用 distill-domain-knowledge/references/memory-loop.md：index@end 纪律）
+    → 交棒："挑 backlog 一个子域，对我说 /distill…"
+```
+
+### 执行纪律
+
+- **STEP2 grill**：每问一次只问一个分支，带推荐答案（参见 `distill-domain-knowledge/references/grilling.md`）。
+- **STEP2 glossary 碰撞**：additive 时必须先检查所有已有词条再落新词（参见 `distill-domain-knowledge/references/glossary-first.md`）。
+- **STEP4 index@end**：Memory loop 收尾必走（参见 `distill-domain-knowledge/references/memory-loop.md`）。
+- **所有产物模板**：见 `templates/` 目录（占位符 `{{DOMAIN}}` 等在此 KB 的产出时填真值）。
+
 ## 交棒
 
 STEP4 完成后，明确告知用户：
