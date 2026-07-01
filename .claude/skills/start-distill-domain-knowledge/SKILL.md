@@ -95,6 +95,21 @@ description: Use to START distilling a NEW domain into a knowledge base — the 
 - **STEP4 index@end**：Memory loop 收尾必走（参见 `distill-domain-knowledge/references/memory-loop.md`）。
 - **所有产物模板**：见 `templates/` 目录（占位符 `{{DOMAIN}}` 等在此 KB 的产出时填真值）。
 
+## 不变量 I1–I8
+
+| # | 不变量 | 来源 |
+|---|---|---|
+| I1 | additive 非破坏式：严格保护既有域**知识文件** `knowledge/<域>/*.md` + 其 recall stub，**永不覆盖/删改** | coding-style immutability |
+| I2 | additive 跨域 glossary 碰撞检查：碰撞 → **grill 专家** → 消歧式 **additive** 编辑（加 scope 限定/拆 overloaded headword，**绝不删除或反转**既有含义）；当场定不了 → 入 `pending/gaps.md` | 铁律#2 / glossary-first |
+| I3 | 生成的 L1 stub **禁** repo-relative `knowledge/*.md` 路径、**禁** host:port；只依赖全局 skill + 可移植 memory MCP | `find-domain-knowledge/SKILL.md:49` |
+| I4 | greenfield 须 **confirm 落点**；"distill-me 本仓守卫"归本仓 CLAUDE.md（非本 skill，保持通用） | grill Q1 |
+| I5 | greenfield **极简**；关系-grill 分支**只 additive 触发** | KISS |
+| I6 | Memory loop：recall@start **反哺**检测/关系判断，index@end 落 namespace + umbrella + backlog | distill `references/memory-loop.md` |
+| I7 | **不**装协议 skill（B1 出界）；产 initial backlog 后**交棒** distill，不做 per-slice 蒸馏 | 用户界定 |
+| I8 | **public-repo hygiene**：本 skill 自身一切产物（SKILL.md / template / spec / fixture）只许抽象占位符 / 中性示例，**零**雇主内部内容；生成的**输出**落用户私有 KB 才填真值；提交公开仓用 **clean git 身份** | distill-me public |
+
+> **I1↔I2 不矛盾**：I1 锁死"既有域**知识文件**不可破坏"；glossary 是 cross-domain 工件，I2 授权对它做经专家裁决的**消歧式 additive 编辑**。
+
 ## 交棒
 
 STEP4 完成后，明确告知用户：
